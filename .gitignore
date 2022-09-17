@@ -1,3 +1,15 @@
+#visual studio
+*.sdf
+*.user
+*.suo
+*.opensdf
+*.db
+*.sln
+.vs/
+Debug/
+x64/
+ipch/
+
 # Prerequisites
 *.d
 
