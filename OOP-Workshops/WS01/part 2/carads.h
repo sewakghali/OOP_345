@@ -2,10 +2,9 @@
 #define SDDS_CARADS_H
 
 #include <iostream>
-//using namespace std;
 
-static double g_taxrate;
-static double g_discount;
+extern double g_taxrate;
+extern double g_discount;
 
 namespace sdds {
 	 int listArgs(int argc, char* argv[]);
@@ -24,15 +23,16 @@ namespace sdds {
 		~Cars();
 		Cars& operator = (Cars&);
 
-		void read(std::istream& is);
+		std::istream& read(std::istream& is);
 		void display(bool reset);
 		char getStatus();
 
 		operator bool() const;
 	};
 
+	double taxedval(double val);
 	std::istream& operator>>(std::istream& is, Cars& car);
-	void operator>>(const Cars& car1, Cars& car2);
+	void operator>>( Cars& car1, Cars& car2);
 }
 
 #endif
