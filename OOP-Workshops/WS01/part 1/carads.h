@@ -2,21 +2,21 @@
 #define SDDS_CARADS_H
 
 #include <iostream>
-using namespace std;
+//using namespace std;
 
-extern double g_taxrate;
-extern double g_discount;
+static double g_taxrate;
+static double g_discount;
 
 namespace sdds {
-	int listArgs(int argc, char* argv[]){}
+	 int listArgs(int argc, char* argv[]);
 
 	class Cars {
+		double car_price{};
+		int car_year{};
+		bool car_promotion{};
+		char car_status{};
 		char car_Brand[10]{};
 		char car_model[15]{};
-		int car_year{};
-		double car_price{};
-		char car_status{};
-		bool car_promotion{};
 
 	public:
 		Cars();
