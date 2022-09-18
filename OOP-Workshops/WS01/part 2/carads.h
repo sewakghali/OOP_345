@@ -20,10 +20,19 @@ namespace sdds {
 
 	public:
 		Cars();
+		Cars(Cars&);
+		~Cars();
+		Cars& operator = (Cars&);
+
 		void read(std::istream& is);
 		void display(bool reset);
 		char getStatus();
+
+		operator bool() const;
 	};
+
+	std::istream& operator>>(std::istream& is, Cars& car);
+	void operator>>(const Cars& car1, Cars& car2);
 }
 
 #endif
