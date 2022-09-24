@@ -76,5 +76,19 @@ namespace sdds {
       delete[] tempObj;
    }
 
-
+   TennisLog& TennisLog::findMatches(const char* playerName) {
+      TennisLog tempObj;
+      for (int i < matchNum; i++) {
+         if (!strcmp(playerName, match_arr[i].loser) || !strcmp(playerName, match_arr[i].winner) {
+            tempObj.addMatch(match_arr[i]);
+         }
+      }
+      return tempObj;
+   }
+   TennisMatch& TennisLog::operator[](size_t arrIndex) {
+      return match_arr[arrIndex];
+   }
+   TennisLog& TennisLog::operator size_t() {
+      return matchNum;
+   }
 }
