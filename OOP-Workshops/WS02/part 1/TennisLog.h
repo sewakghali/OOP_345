@@ -1,6 +1,7 @@
 #pragma once
 
 #include<iostream>
+#include<string>
 
 namespace sdds {
    typedef struct{
@@ -9,10 +10,9 @@ namespace sdds {
       std::string tournamentName{};
       std::string winner{};
       std::string loser{};
-
-      TennisMatch& operator =(TennisMatch&);
    } TennisMatch;
 
+   TennisMatch& operator=(TennisMatch& oldObj);
    std::ostream& operator << (std::ostream& os, TennisMatch& tm);
 
    class TennisLog{
@@ -24,8 +24,8 @@ public:
    //TennisLog()
 
    void addMatch(TennisMatch&);
-   TennisLog& findMatch(const char*);
-   TennisLog& operator[](size_t);
+   TennisLog& findMatches(const char*);
+   TennisMatch& operator[](size_t);
    TennisLog& operator size_t();
    };
 }
