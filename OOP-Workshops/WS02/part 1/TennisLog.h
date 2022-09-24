@@ -3,23 +3,28 @@
 #include<iostream>
 
 namespace sdds {
-   Typedef Struct{
-      int matchId;
-      string tournamentID;
-      string tournamentName;
-      string winner;
-      string loser;
+   typedef struct{
+      int matchId{0};
+      std::string tournamentID{};
+      std::string tournamentName{};
+      std::string winner{};
+      std::string loser{};
+
+      TennisMatch& operator =(TennisMatch&);
    } TennisMatch;
+
    std::ostream& operator << (std::ostream& os, TennisMatch& tm);
 
-   Class TennisLog{
+   class TennisLog{
+      TennisMatch* match_arr{};
+      int matchNum;
 public:
    TennisLog();
-   TennisLog(char*);
+   TennisLog(const char*);
    //TennisLog()
 
    void addMatch(TennisMatch&);
-   TennisLog& findMatch(char*);
+   TennisLog& findMatch(const char*);
    TennisLog& operator[](size_t);
    TennisLog& operator size_t();
    };
