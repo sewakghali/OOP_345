@@ -7,10 +7,10 @@ using namespace std;
 namespace sdds {
    TennisMatch::TennisMatch() {
       matchId = 0;
-      tournamentID = "\0";
-      tournamentName = "\0";
-      winner = "\0";
-      loser = "\0";
+      tournamentID = "";
+      tournamentName = "";
+      winner = "";
+      loser = "";
    }
    TennisMatch::TennisMatch(const char* tID, const char* tName, int mId, const char* mWinner, const char* mLoser) {
       this->matchId = mId;
