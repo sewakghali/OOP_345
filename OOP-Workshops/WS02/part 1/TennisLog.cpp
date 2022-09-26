@@ -30,31 +30,23 @@ namespace sdds {
       return *this;
    }
 
-   /*TennisMatch::operator bool()const {
-      if(this.)
-   }*/
-
    ostream& operator << (ostream& os, TennisMatch& tm) {
-      //std::cout << "extraction overload begins" << std::endl;
       TennisMatch* ptr = &tm;
       if (ptr) {
-         //os << "adress = " << &ptr << endl;
-         os << "Tourney ID : " << tm.tournamentID << endl;
-         os << "Match ID : " << tm.matchId << endl;
-         os << "Tourney : " << tm.tournamentName << endl;
-         os << "Winner : " << tm.winner << endl;
-         os << "Loser : " << tm.loser << endl;
+         os << right << setw(20) << setfill('.') << "Tourney ID" << " : " << left << setw(30) << tm.tournamentID << endl;
+         os << right << setw(20) << setfill('.') << "Match ID" << " : " << left << setw(30) << tm.matchId << endl;
+         os << right << setw(20) << setfill('.') << "Tourney" << " : " << left << setw(30) << tm.tournamentName << endl;
+         os << right << setw(20) << setfill('.') << "Winner" << " : " << left << setw(30) << tm.winner << endl;
+         os << right << setw(20) << setfill('.') << "Loser" << " : " << left << setw(30) << tm.loser << endl;
       }
       else {
          os << "Empty Match";
       }
-      //std::cout << "extraction overload ends" << std::endl;
-
       return os;
    }
 
    TennisLog::TennisLog() {
-      TennisMatch* match_arr{ nullptr };
+      match_arr = { nullptr };
       matchNum = 0;
    }
 
@@ -69,8 +61,6 @@ namespace sdds {
       infile.clear();
       infile.seekg(0);
 
-      cout << "adding recs begins" << endl;
-
       match_arr = new TennisMatch[count];
       getline(infile, temp);
       for (int i = 0; i < count - 1; i++) {
@@ -80,11 +70,7 @@ namespace sdds {
          infile.ignore(1, ',');
          getline(infile, match_arr[i].winner, ',');
          getline(infile, match_arr[i].loser);
-         //infile.ignore(1, '\n');
       }
-
-      cout << "adding recs ends" << endl;
-
       matchNum = count;
    }
 
@@ -92,9 +78,6 @@ namespace sdds {
       TennisMatch* tempObj{};
       if (matchNum > 0) {
          tempObj = new TennisMatch[matchNum];
-      }
-      else {
-
       }
       for (int i = 0; i < matchNum; i++) {
          tempObj[i] = this->match_arr[i];
@@ -112,7 +95,8 @@ namespace sdds {
    }
 
    TennisLog& TennisLog::findMatches(const char* player) {
-      TennisLog tempObj;
+      static TennisLog tempObj;
+      tempObj = {};
       string playerName = string(player);
       for (int i = 0; i < matchNum; i++) {
          if (playerName == match_arr[i].loser || playerName == match_arr[i].winner) {
@@ -122,7 +106,7 @@ namespace sdds {
       return tempObj;
    }
    TennisMatch& TennisLog::operator[](size_t arrIndex) {
-      if (arrIndex > matchNum) {
+      if (arrIndex > size_t(matchNum)) {
          return match_arr[0];
       }
       return match_arr[arrIndex];
