@@ -24,11 +24,20 @@ namespace sdds {
 public:
    TennisLog();
    TennisLog(const char*);
-   //TennisLog()
+   TennisLog(TennisLog&);
+   TennisLog(TennisLog&&);
+   TennisLog& operator = (TennisLog&);
+   TennisLog& operator = (TennisLog&&);
+   ~TennisLog();
 
    void addMatch(TennisMatch&);
    TennisLog& findMatches(const char*);
    TennisMatch& operator[](size_t);
    operator size_t();
+   };
+
+   class Timer {
+      start();
+      stop();
    };
 }

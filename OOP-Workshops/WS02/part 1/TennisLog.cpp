@@ -74,6 +74,48 @@ namespace sdds {
       matchNum = count;
    }
 
+   TennisLog::TennisLog(TennisLog& ogLog) {
+      *this = ogLog;
+   }
+
+   TennisLog::TennisLog(TennisLog&& ogLog) {
+      *this = ogLog;
+   }
+
+   TennisLog& TennisLog::operator = (TennisLog&& ogLog) {
+      if (matchNum > 0) {
+         delete[] match_arr;
+         match_arr = nullptr;
+      }
+
+      match_arr = new TennisMatch[ogLog.matchNum];
+      for (int i = 0; i < ogLog.matchNum; i++) {
+         match_arr[i] = ogLog.match_arr[i];
+      }
+
+      matchNum = ogLog.matchNum;
+      return *this;
+   }
+
+   TennisLog::~TennisLog() {
+      delete[] match_arr;
+   }
+
+   TennisLog& TennisLog::operator = (TennisLog& ogLog) {
+      if(matchNum > 0) {
+         delete[] match_arr;
+         match_arr = nullptr;
+      }
+
+      match_arr = new TennisMatch[ogLog.matchNum];
+      for (int i = 0; i < ogLog.matchNum; i++) {
+         match_arr[i] = ogLog.match_arr[i];
+      }
+
+      matchNum = ogLog.matchNum;
+      return *this;
+   }
+
    void TennisLog::addMatch(TennisMatch& matchObj) {
       TennisMatch* tempObj{};
       if (matchNum > 0) {
