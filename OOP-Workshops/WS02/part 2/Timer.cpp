@@ -12,10 +12,11 @@ using namespace std::chrono;
 
 namespace sdds {
    void Timer::start() {
-      begin = std::chrono::steady_clock::now();
+      begin = steady_clock::now();
    }
    long long Timer::stop() {
-      end = std::chrono::steady_clock::now();
+      steady_clock::time_point end{};
+      end = steady_clock::now();
       return duration_cast<nanoseconds>(end - begin).count();
    }
 }
