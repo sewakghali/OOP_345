@@ -1,0 +1,29 @@
+/******************************************************************
+Workshop 1: Reflect.txt
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: September 18, 2022
+******************************************************************/
+
+This workshop was very helpful in learning of concepts like scope management, accepting command line arguments and guarding class definitions from duplications. I also got a chance to experience the concepts that I learnt in OOP244 like memory management, rule of 3 and operator overloading. Learning the newer concepts like using extern as linkage specifier was a bit confusing at first since I got errors of undefined variable from carads.cpp and w1_p2.cpp. But then I initialized the global variables in the carads.cpp and everything worked fine.
+Here is the snippet from carads.h:
+extern double g_taxrate;
+extern double g_discount;
+
+Here is the snippet from carads.cpp:
+double g_taxrate = 0;
+double g_discount = 0;
+
+Apart from this mistake that cost me a lot of time, everything else was easy. Now, the answers for questions written in the readme.md are:
+1. The difference between internal and external linkage is that in internal linkage, the variable is known globally in the specified module, whereas in external linkage, the scope of the variable extends to all the modules. To explicitly state the internal linkage of a variable, the keyword static is used, and to extend its visibility to other modules, the keyword extern is used.
+extern double g_taxrate; //external linkage
+
+2. Static variables are the variables whose lifetime is equal to the lifetime of the program, which means that they are not destroyed until the execution of the whole program is complete. In this workshop, the static variable was integer variable named counter in the display function:
+static int counter = 0;
+This variable did not reset its value even the function was re-executed and retained its value from previous execution of the same function.
+
+3. I made a few changes in part 1 to make it work as required in part 2. This biggest change was changing the car brand array from fixed length to dynamic array. Other changes include operator overloading of (extraction operator) >>, and bool operator overload for class Cars.
+operator Cars::bool() const;
+std::istream &operator>>(std::istream &is, Cars &car);
+void operator>>(Cars &car1, Cars &car2);

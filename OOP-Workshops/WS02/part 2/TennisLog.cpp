@@ -144,7 +144,7 @@ namespace sdds
          matchNum = ogLog.matchNum;
          ogLog.match_arr = nullptr;
          ogLog.matchNum = 0;
-         // _sleep(0);
+          //_sleep(0);
       }
       return *this;
    }
