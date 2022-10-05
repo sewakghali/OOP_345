@@ -8,7 +8,14 @@ namespace sdds {
    const string& Dictionary::getDefinition() const { return m_definition; }
    Dictionary::Dictionary(const string& term, const string& definition) : m_term{ term }, m_definition{ definition } {}
 
-   // TODO: Code the missing prototype functions and operators
-   //       that the class needs in order to work with the Queue class.
-   //       Implement them in the Dictionary.cpp file.
+   Dictionary::Dictionary() {}
+
+   Dictionary& Dictionary::operator=(const Dictionary& ogDict) {
+      m_term = ogDict.getTerm();
+      m_definition = ogDict.getDefinition();
+   }
+
+   std::ostream& operator <<(std::ostream& os, Dictionary& dict) {
+      os << dict.getTerm() << ": " << dict.getDefinition() << endl;
+   };
 }
