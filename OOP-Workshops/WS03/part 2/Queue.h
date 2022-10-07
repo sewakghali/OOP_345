@@ -39,7 +39,7 @@ namespace sdds {
    template<typename T, size_t arrCap>
    Queue<T, arrCap>::Queue(T* item, size_t cap) {
       currentCap = 0;
-      for (int i = 0; i < cap; i++) {
+      for (size_t i = 0; i < cap; i++) {
          elemArr[i] = item[i];
          currentCap++;
       }
@@ -64,7 +64,7 @@ namespace sdds {
       T* temp;
       notInQ = elemArr[0];
       temp = new T[currentCap];
-      for (int i = 0; i < currentCap; i++) {
+      for (size_t i = 0; i < currentCap; i++) {
          temp[i] = elemArr[i+1];
          elemArr[i] = temp[i];
       }
@@ -82,7 +82,7 @@ namespace sdds {
    template<typename T, size_t  arrCap>
    void Queue<T, arrCap>::display() {
       std::cout << "----------------------\n| Dictionary Content |\n----------------------" << std::endl;
-      for (int i = 0; i < currentCap; i++) {
+      for (size_t i = 0; i < currentCap; i++) {
          std::cout << elemArr[i] << "\n";
       }
       std::cout << "----------------------" << std::endl;
@@ -92,7 +92,7 @@ namespace sdds {
    template<>
    inline void Queue<Dictionary, 100>::display() {
       std::cout << "----------------------\n| Dictionary Content |\n----------------------" << std::endl;
-      for (int i = 0; i < currentCap; i++) {
+      for (size_t i = 0; i < currentCap; i++) {
          std::cout.width(21);
          std::cout << std::setfill(' ') << elemArr[i].getTerm();
          std::cout << ": " << elemArr[i].getDefinition() << std::endl;

@@ -18,6 +18,7 @@ namespace sdds {
    Dictionary& Dictionary::operator=(const Dictionary& ogDict) {
       m_term = ogDict.getTerm();
       m_definition = ogDict.getDefinition();
+      return *this;
    }
 
    bool operator ==(const Dictionary& d1, const Dictionary& d2){
@@ -27,5 +28,6 @@ namespace sdds {
 
    std::ostream& operator <<(std::ostream& os, Dictionary& dict) {
       os << dict.getTerm() << ": " << dict.getDefinition();
+      return os;
    };
 }

@@ -19,7 +19,7 @@ namespace sdds {
    template<typename T>
    bool UniqueQueue<T>::push(const T& item) {
       if (this->currentCap < 100) {
-         for (int i = 0; i < this->currentCap; i++) {
+         for (size_t i = 0; i < this->currentCap; i++) {
             if (this->elemArr[i] == item) return false;
          }
          this->elemArr[this->currentCap] = item;
@@ -33,7 +33,7 @@ namespace sdds {
    template<>
    inline bool UniqueQueue<double>::push(const double& item) {
       if (this->currentCap < 100) {
-         for (int i = 0; i < this->currentCap; i++) {
+         for (size_t i = 0; i < this->currentCap; i++) {
             if ((this->elemArr[i] == item) || ((this->elemArr[i]-item ) <= 0.005 && (item - this->elemArr[i]) <= 0.005)) return false;
          }
          this->elemArr[this->currentCap] = item;
