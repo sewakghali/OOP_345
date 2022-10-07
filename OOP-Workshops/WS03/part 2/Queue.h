@@ -61,15 +61,13 @@ namespace sdds {
 
    template<typename T, size_t arrCap>
    T& Queue<T, arrCap>::pop(){
-      T* temp;
+      T temp[arrCap]{};
       notInQ = elemArr[0];
-      temp = new T[currentCap];
       for (size_t i = 0; i < currentCap; i++) {
          temp[i] = elemArr[i+1];
          elemArr[i] = temp[i];
       }
       currentCap--;
-      delete[] temp;
       return notInQ;
    }
 
