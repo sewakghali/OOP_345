@@ -1,0 +1,14 @@
+/******************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 5, 2022
+******************************************************************/
+This week's workshop has been hard for me since it is a new concept. Although it may seem to be easy at first glance, it is a bit complex than that. But I for sure have taken long time to grasp this concept. I have learnt template classes, using templates with member functions and how to specialise them for a particular data type. When I did this workshop, I struggled with template specialisation with display function for dictionary at first, then after a stupid mistake I did by ommiting the size_t from the template declaration in template function. I then replaced it with a number and then the function ran fine.
+template<>
+   inline void Queue<Dictionary, 100>::display() {...}
+I also learnt about templates in heirarchy from the UniqueQueue module which contains UniqueQueue class which is derived from the Queue class from the Queue module. 
+template<typename T>
+   class UniqueQueue:public Queue<T, 100> {...};
+In the end, I would write that even though I am left with some doubts regarding member specialisation, I have learnt a lot about templates.
