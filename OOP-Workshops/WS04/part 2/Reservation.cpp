@@ -1,7 +1,6 @@
 #include<iomanip>
 #include<algorithm>
-//#include<iterator>
-//#include <boost/algorithm/string>
+#include<string>
 #include"Reservation.h"
 
 using namespace std;
@@ -45,7 +44,7 @@ namespace sdds {
       r_day = day;
       r_hour = time;
    }
-   std::ostream& operator << (std::ostream& os, Reservation& res) {
+   std::ostream& operator << (std::ostream& os,const Reservation& res) {
       os << "Reservation " << setw(10) << setfill(' ') << right << res.r_id << ": " << setw(20) << res.r_name << setw(26) << left << "  <" + res.r_email + ">  ";
       if( res.r_hour <= 9 && res.r_hour >= 6) {
          os << "Breakfast";
@@ -71,10 +70,19 @@ namespace sdds {
       return os;
    }
 
+   /*void Reservation::operator =(Reservation& r1, Reservation& r2) {
+      r1.numPeople = r2.numPeople;
+      r1.r_day = r2.r_day;
+      r1.r_hour = r2.r_hour;
+      r1.r_email = r2.r_email;
+      r1.r_id = r2.r_id;
+      r1.r_name = r2.r_name;
+   }*/
+
    inline std::string trim(std::string& str)
    {
-      str.erase(str.find_last_not_of(' ') + 1);         //suffixing spaces
-      str.erase(0, str.find_first_not_of(' '));       //prefixing spaces
+      str.erase(str.find_last_not_of(' ') + 1);
+      str.erase(0, str.find_first_not_of(' '));
       return str;
    }
 }
