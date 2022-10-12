@@ -1,0 +1,32 @@
+/******************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 11, 2022
+******************************************************************/
+
+This workshop provided me the chance to gain my experience with aggregation and composition, along with various std::string operations like substr, find, erase, and stoi. I used my exisiting experience from my previous workshops to build this project and used dynamic memory allocation to hold the pointers of the objects of type const Reservation in Restaurant and ConfirmationSender modules. I also revisited the rule of five by building copy constructors, move constructors, copy assignment, move assignment and destructors in the modules Restaurant and ConfirmationSender. However, doing this workshop was not easy. It required lots of debugging, especially in the copy assignment operator. After costing me hours, I found out a stupid mistake of mine. I forgot to allocate the memory for the resArr in the Restaurant module's copy assignment.
+Restaurant& Restaurant::operator =(const Restaurant& og) {
+      if (&og != this) {
+         if (resArr != nullptr) {
+            delete[] resArr;
+         }
+         resArr = new const Reservation*[og.arrCnt]; //forgot to add this line
+         for (size_t i = 0; i < og.arrCnt; i++) {
+            resArr[i] = og.resArr[i];
+         }
+         arrCnt = og.arrCnt;
+      }
+      return *this;
+   }
+There is also another problem while debugging. The program runs fine in g++, but when debugging in Visual Studio, invalid read error pops up in the custom constructor in Reservation module. I was unable to fix this one, but the program runs perfectly.
+Restaurant::Restaurant(const Reservation* reservations[], size_t cnt) {
+      if (!*reservations) { //invalid read error pops up.
+         resArr = nullptr;
+         arrCnt = 0;
+      }
+      else {
+         ...
+      }
+   }
