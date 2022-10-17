@@ -9,7 +9,7 @@ namespace sdds {
       std::string c_name;
       size_t c_arrLen = 0;
       T* c_arr{};
-      //void (*funPtr)(const Collection<T>&, const T&);
+      void (*addObs)(const Collection<T>&, const T&);
 
    public:
       Collection(const std::string& name);
@@ -62,7 +62,8 @@ namespace sdds {
 
    template<typename T>
    inline Collection<T>& Collection<T>::operator+=(const T& item) {
-      T temp[c_arrLen];
+      T* temp;
+      temp = new T[c_arrLen];
       for (size_t i = 0; i < c_arrLen; i++) {
          temp[i] = c_arr[i];
       }
@@ -72,8 +73,10 @@ namespace sdds {
       for (size_t i = 0; i < c_arrLen-1; i++) {
          c_arr[i] = temp[i];
       }
-      //delete[] temp;
+      delete[] temp;
       c_arr[c_arrLen - 1] = item;
+      addObs(*this, item);
+      return *this;
    }
 
    template<typename T>
@@ -90,9 +93,10 @@ namespace sdds {
 
    template<typename T>
    inline std::ostream& operator << (std::ostream& os, Collection<T>& collection) {
-      os << collection.name();
+      os << collection.name() << std::endl;
       for (size_t i = 0; i < collection.size(); i++) {
          os << collection[i];
       }
+      return os;
    }
 }

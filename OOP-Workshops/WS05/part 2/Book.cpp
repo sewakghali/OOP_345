@@ -1,6 +1,7 @@
 //line 63 template
 #include<iomanip>
 #include<algorithm>
+#include<string>
 #include"Book.h"
 
 using namespace std;
@@ -67,6 +68,7 @@ namespace sdds {
 
    std::ostream& operator << (std::ostream& os, Book& book) {
       os << setw(20) << setfill(' ') << right << book.b_author << " | " << setw(22) << book.b_title << " | " << setw(5) << book.b_country << " | " << setw(4) << book.b_year << " | " << setw(6) << fixed << setprecision(2) << book.b_price  << " | " << left << book.b_desc << endl;
+      return os;
    }
 
    inline std::string trim(std::string& str)

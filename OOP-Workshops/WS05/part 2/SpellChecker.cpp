@@ -1,12 +1,13 @@
+#include<fstream>
+#include<string>
 #include"SpellChecker.h"
 #include"Book.h"
 using namespace std;
 namespace sdds {
    SpellChecker::SpellChecker(const char* filename) {
-      istream is(filename);
+      ifstream is(filename);
       if (is.good()) {
          string temp = "";
-         //sting tempStr=""
          int i = 0;
          do {
             getline(is, temp);
@@ -28,7 +29,7 @@ namespace sdds {
 
    void SpellChecker::operator()(std::string& text) {
       for (int i = 0; i < 6; i++) {
-         text.replace(text.find(m_badWords[i], 0), m_badWords->length, m_goodWords[i]);
+         text.replace(text.find(m_badWords[i], 0), m_badWords[i].length(), m_goodWords[i]);
          m_numReplaced[i]++;
       }
    }

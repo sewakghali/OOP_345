@@ -1,3 +1,4 @@
+#include<string>
 #include"Movie.h"
 #include"Book.h"
 
@@ -30,5 +31,6 @@ namespace sdds {
    
    std::ostream& operator << (std::ostream& os, Movie& movie) {
       os << movie.m_title << " " << movie.m_year << " " << movie.m_desc << endl;
+      return os;
    }
 }
