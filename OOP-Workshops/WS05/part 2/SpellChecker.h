@@ -3,9 +3,9 @@
 namespace sdds {
    class SpellChecker {
       //std::string m_strArr[][];
-      std::string m_badWords[6];
-      std::string m_goodWords[6];
-      int m_numReplaced[6];
+      std::string m_badWords[6] = {""};
+      std::string m_goodWords[6] = {""};
+      int m_numReplaced[6] = {0};
 
    public:
       SpellChecker(const char* filename);

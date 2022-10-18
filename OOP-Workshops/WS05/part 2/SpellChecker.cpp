@@ -1,4 +1,5 @@
 #include<fstream>
+#include<iomanip>
 #include<string>
 #include"SpellChecker.h"
 #include"Book.h"
@@ -29,12 +30,22 @@ namespace sdds {
 
    void SpellChecker::operator()(std::string& text) {
       for (int i = 0; i < 6; i++) {
-         text.replace(text.find(m_badWords[i], 0), m_badWords[i].length(), m_goodWords[i]);
-         m_numReplaced[i]++;
+         for (int j = 0; j < text.length(); j++) {
+            size_t index = text.find(m_badWords[i], j);
+            if (index < text.length() && index >= 0) {
+               text.replace(index, m_badWords[i].length(), m_goodWords[i]);
+               m_numReplaced[i]++;
+               j = index- m_badWords[i].length()+m_goodWords[i].length();
+            }
+         }
       }
+      return;
    }
    
    void SpellChecker::showStatistics(std::ostream& out) const {
-      out << "1";
+      cout << "Spellchecker Statistics" << endl;
+      for (int i = 0; i < 6; i++) {
+         out << setw(15) << right << setfill(' ') << m_badWords[i] << ": " << left << m_numReplaced[i] << " replacements" << endl;
+      }
    }
 }

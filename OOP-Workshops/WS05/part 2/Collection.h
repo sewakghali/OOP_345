@@ -9,7 +9,7 @@ namespace sdds {
       std::string c_name;
       size_t c_arrLen = 0;
       T* c_arr{};
-      void (*addObs)(const Collection<T>&, const T&);
+      void (*addObs)(const Collection<T>&, const T&){};
 
    public:
       Collection(const std::string& name);
@@ -38,6 +38,7 @@ namespace sdds {
       c_name = name;
       c_arrLen = 0;
       c_arr = nullptr;
+      addObs = nullptr;
    }
 
    template<typename T>
@@ -57,6 +58,7 @@ namespace sdds {
 
    template<typename T>
    inline void Collection<T>::setObserver(void (*observer)(const Collection<T>&, const T&)) {
+      addObs = observer;
       return;
    }
 
@@ -75,12 +77,17 @@ namespace sdds {
       }
       delete[] temp;
       c_arr[c_arrLen - 1] = item;
-      addObs(*this, item);
+      if (addObs != nullptr) {
+         addObs(*this, item);
+      }
       return *this;
    }
 
    template<typename T>
    inline T* Collection<T>::operator[](const std::string& title) const {
+      for (size_t i = 0; i < c_arrLen; i++) {
+         if (c_arr[i].title() == title) return &c_arr[i];
+      }
       return nullptr;
    }
 
@@ -88,6 +95,10 @@ namespace sdds {
    inline T& Collection<T>::operator[](size_t idx) const {
       if (idx < c_arrLen) {
          return c_arr[idx];
+      }
+      else {
+         std::string err = "Bad index ["+ std::to_string(idx)+ "]. Collection has [" + std::to_string(idx) +"] items.";
+            throw std::out_of_range(err);
       }
    }
 
