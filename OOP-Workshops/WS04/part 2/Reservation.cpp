@@ -77,14 +77,6 @@ namespace sdds {
       return os;
    }
 
-   /*void Reservation::operator =(Reservation& r1, Reservation& r2) {
-      r1.numPeople = r2.numPeople;
-      r1.r_day = r2.r_day;
-      r1.r_hour = r2.r_hour;
-      r1.r_email = r2.r_email;
-      r1.r_id = r2.r_id;
-      r1.r_name = r2.r_name;
-   }*/
 
    inline std::string trim(std::string& str)
    {
