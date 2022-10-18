@@ -69,7 +69,7 @@ namespace sdds {
 
    std::ostream& operator << (std::ostream& os,const Restaurant& res) {
       static size_t call_Cnt= 1;
-      os << "--------------------------\nFancy Restaurant(" << call_Cnt <<")\n--------------------------" << endl;
+      os << "--------------------------\nFancy Restaurant (" << call_Cnt <<")\n--------------------------" << endl;
       if (res.arrCnt <= 0) {
          os << "This restaurant is empty!" << endl;
       }
