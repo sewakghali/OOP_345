@@ -54,7 +54,6 @@ namespace sdds {
 
    ConfirmationSender& ConfirmationSender::operator+=(const Reservation& res) {
       bool isUnique = true;
-      Reservation* resv = new Reservation(res);
       for (size_t i = 0; i < count; i++) {
          if (resvArr[i] == &res) {
             isUnique = false;
@@ -72,7 +71,7 @@ namespace sdds {
          for (size_t i = 0; i < count-1; i++) {
             resvArr[i] = temp[i];
          }
-         resvArr[count - 1] = resv;
+         resvArr[count - 1] = &res;
          delete[] temp;
       }
       return *this;
