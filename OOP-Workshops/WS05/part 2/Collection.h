@@ -1,30 +1,40 @@
-#pragma once
+/******************************************************************
+Module: Collection.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 17, 2022
+******************************************************************/
+
+#ifndef SDDS_COLLECTION_H
+#define SDDS_COLLECTION_H
 #include<iostream>
 #include<algorithm>
 #include<string>
 
 namespace sdds {
    template<typename T>
-   class Collection {
-      std::string c_name;
-      size_t c_arrLen = 0;
-      T* c_arr{};
-      void (*addObs)(const Collection<T>&, const T&){};
+   class Collection { //templated class
+      std::string c_name; //name of the collection
+      size_t c_arrLen = 0; //length of c_arr
+      T* c_arr{}; //dynamic array to store the objects of type T
+      void (*addObs)(const Collection<T>&, const T&){}; //pointer to function for callback operations
 
    public:
       Collection(const std::string& name);
       ~Collection();
-      const std::string& name() const;
-      size_t size() const;
-      void setObserver(void (*observer)(const Collection<T>&, const T&));
-      Collection<T>& operator+=(const T& item);
-      T* operator[](const std::string& title) const;
-      T& operator[](size_t idx) const;
+      const std::string& name() const; //returns c_name
+      size_t size() const; //returns c_arrLen
+      void setObserver(void (*observer)(const Collection<T>&, const T&)); //sets the value of addObs function pointer
+      Collection<T>& operator+=(const T& item); //adds a new item of type T in the c_arr
+      T* operator[](const std::string& title) const; //returns the element from c_arr whose title matches the argument value
+      T& operator[](size_t idx) const; //returns idxth element of c_arr
 
    };
    template<typename T>
-   std::ostream& operator << (std::ostream& os, Collection<T>& collection);
-   std::string trim(std::string& str);
+   std::ostream& operator << (std::ostream& os, Collection<T>& collection); //insertion operator overload
+
+   std::string trim(std::string& str); //custom function to remove whitespaces
 
    inline std::string trim(std::string& str)
    {
@@ -64,6 +74,10 @@ namespace sdds {
 
    template<typename T>
    inline Collection<T>& Collection<T>::operator+=(const T& item) {
+      for (size_t i = 0; i < c_arrLen; i++) {
+         if (c_arr[i].title() == item.title()) return *this;
+      }
+
       T* temp;
       temp = new T[c_arrLen];
       for (size_t i = 0; i < c_arrLen; i++) {
@@ -104,10 +118,10 @@ namespace sdds {
 
    template<typename T>
    inline std::ostream& operator << (std::ostream& os, Collection<T>& collection) {
-      os << collection.name() << std::endl;
       for (size_t i = 0; i < collection.size(); i++) {
          os << collection[i];
       }
       return os;
    }
 }
+#endif

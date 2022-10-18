@@ -1,4 +1,11 @@
-//line 63 template
+/******************************************************************
+Module: Book.cpp
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 17, 2022
+******************************************************************/
+
 #include<iomanip>
 #include<algorithm>
 #include<string>
@@ -60,11 +67,6 @@ namespace sdds {
    void Book::changePrice(const double price) {
       b_price = price;
    }
-
-   /*template<typename T>
-   void Book::fixSpelling(T& spellChecker) {
-
-   }*/
 
    std::ostream& operator << (std::ostream& os, Book& book) {
       os << setw(20) << setfill(' ') << right << book.b_author << " | " << setw(22) << book.b_title << " | " << setw(5) << book.b_country << " | " << setw(4) << book.b_year << " | " << setw(6) << fixed << setprecision(2) << book.b_price  << " | " << left << book.b_desc << endl;

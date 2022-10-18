@@ -1,3 +1,12 @@
+/******************************************************************
+Module: Movie.cpp
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 17, 2022
+******************************************************************/
+
+#include<iomanip>
 #include<string>
 #include"Movie.h"
 #include"Book.h"
@@ -29,8 +38,8 @@ namespace sdds {
       m_desc = trim(temp);
    }
    
-   std::ostream& operator << (std::ostream& os, Movie& movie) {
-      os << movie.m_title << " " << movie.m_year << " " << movie.m_desc << endl;
+   std::ostream& operator << (std::ostream& os,const Movie& movie) {
+      os << setw(40) << right << setfill(' ') << movie.m_title << " | "  << setw(4) << movie.m_year << " | " << left << movie.m_desc << endl;
       return os;
    }
 }

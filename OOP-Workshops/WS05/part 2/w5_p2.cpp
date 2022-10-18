@@ -67,10 +67,11 @@ int main(int argc, char** argv)
 			do {
 				std::getline(in, temp);
 				if (!(temp[0] == '#' || temp == "")) {
+					//library.setObserver(bookAddedObserver);
 					library += sdds::Book(temp);
 					i++;
 				}
-			} while (i<3);
+			} while (i<4);
 		}
 		else {
 			std::cout << "ERROR: Cannot open file.\n";
@@ -172,13 +173,11 @@ int main(int argc, char** argv)
 				//       - lines that start with "#" are considered comments and should be ignored
 				if (!(temp[0] == '#' || temp == "")) {
 					//       - store each book read into the array "library"
-					library += Movie(temp);
+					movies[i] = Movie(temp);
 					i++;
 				}
 			} while (!in.eof() || i<4);
 		}
-		//       - if the file cannot be open, print a message to standard error console and
-		//                exit from application with error code "AppErrors::CannotOpenFile"
 		else {
 			std::cout << "ERROR: Cannot open file.\n";
 			exit(AppErrors::CannotOpenFile);
@@ -188,9 +187,6 @@ int main(int argc, char** argv)
 	{
 		std::cerr << "ERROR: Incorrect number of arguments.\n";
 		exit(AppErrors::BadArgumentCount);
-	}
-
-
 	}
 
 	std::cout << "-----------------------------------------\n";
@@ -221,8 +217,14 @@ int main(int argc, char** argv)
 		//       If an exception occurs print a message in the following format
 		//** EXCEPTION: ERROR_MESSAGE<endl>
 		//         where ERROR_MESSAGE is extracted from the exception object.
-		/*for (auto i = 0u; i < 10; ++i)
-			std::cout << theCollection[i];*/
+	try {
+		for (auto i = 0u; i < 10; ++i) {
+			std::cout << theCollection[i];
+			}
+		}
+	catch (std::out_of_range& msg) {
+		std::cout << "** EXCEPTION: " << msg.what() << std::endl;
+	}
 
 	std::cout << "-----------------------------------------\n\n";
 
@@ -230,22 +232,28 @@ int main(int argc, char** argv)
 	std::cout << "-----------------------------------------\n";
 	std::cout << "Testing the functor\n";
 	std::cout << "-----------------------------------------\n";
-	//for (auto i = 3; i < argc; ++i)
-	//{
-	//		// TODO: The following statement can generate generate an exception
-	//		//         write code to handle the exception
-	//		//       If an exception occurs print a message in the following format
-	//		//** EXCEPTION: ERROR_MESSAGE<endl>
-	//		//         where ERROR_MESSAGE is extracted from the exception object.
-	//		SpellChecker sp(argv[i]);
-	//		for (auto j = 0u; j < library.size(); ++j)
-	//			library[j].fixSpelling(sp);
-	//		sp.showStatistics(std::cout);
+	for (auto i = 3; i < argc; ++i)
+	{
+			// TODO: The following statement can generate generate an exception
+			//         write code to handle the exception
+			//       If an exception occurs print a message in the following format
+			//** EXCEPTION: ERROR_MESSAGE<endl>
+			//         where ERROR_MESSAGE is extracted from the exception object.
+			try {
+			SpellChecker sp(argv[i]);
 
-	//		for (auto j = 0u; j < theCollection.size(); ++j)
-	//			theCollection[j].fixSpelling(sp);
-	//		sp.showStatistics(std::cout);
-	//}
+				for (auto j = 0u; j < library.size(); ++j)
+					library[j].fixSpelling(sp);
+				sp.showStatistics(std::cout);
+
+				for (auto j = 0u; j < theCollection.size(); ++j)
+					theCollection[j].fixSpelling(sp);
+				sp.showStatistics(std::cout);
+			}
+			catch (const char* msg) {
+				std::cout << "** EXCEPTION: " << msg << std::endl;
+			}
+	}
 	if (argc < 3) {
 		std::cout << "** Spellchecker is empty\n";
 		std::cout << "-----------------------------------------\n";

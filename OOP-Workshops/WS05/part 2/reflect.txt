@@ -1,0 +1,26 @@
+/******************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 17, 2022
+******************************************************************/
+This workshop was lengthy, tricky but very very informative one. Up until previous workshops, most of the concepts I applied were somewhat familiar to me, but this workshop, this one was the real deal. I spent over 48 hours in total, doing this workshop. I learnt about functors, function pointers, function callbacks, and error handling in C++, all in a single workshop. This is the best workshop that I have ever done during my course of CPA program. I spent the whole sunday working on this workshop but I still had a lot of things to do up until the end of the end. The g++ compile log was filled with so many errors that even the developer powershell in Visual Studio could not log the whole error. I tried debugging with visual studio but I got some errors regarding symbols not found, so I stuck to g++ compiler. I then started to comment out the parts of w5p2.cpp and stated doing one test at a time and eventually, all my work paid off. I felt so satisfied after doing this workshop. Now lets talk about some code snippets of the above concepts that I learnt. 
+This is the functor definition from the SpellChecker.cpp:
+void SpellChecker::operator()(std::string& text) {
+      ...
+      return;
+   }
+It is basically a call to the SpellChecker object with a string as a parameter. This functor removes the spelling mistakes from the string that is passed to it.
+This is the pointer to function and callback in Collection.h:
+void (*addObs)(const Collection<T>&, const T&){};
+This attribute of Collection class stores the functions "bookAddedObserver" and "movieAddedObserver" when the function setObserver from Collection.h is called, with either of the two mentioned functions as parameter. The addObs pointer to function is then assigned the address value of the function received as parameter.
+The callback happens when a new item is added to the Collection object and the addObs pointer is set to something other than nullptr:
+template<typename T>
+   inline Collection<T>& Collection<T>::operator+=(const T& item) {
+      ... // previous code
+      if (addObs != nullptr) {
+         addObs(*this, item);
+      }
+      return *this;
+   }

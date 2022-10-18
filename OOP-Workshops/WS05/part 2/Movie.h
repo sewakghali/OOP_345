@@ -1,10 +1,18 @@
+/******************************************************************
+Module: Movie.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: October 17, 2022
+******************************************************************/
+
 #pragma once
 #include<iostream>
 namespace sdds {
    class Movie {
-      size_t m_year;
-      std::string m_title;
-      std::string m_desc;
+      size_t m_year; //year pf movie
+      std::string m_title; //movie title
+      std::string m_desc; //movie description
 
    public:
       Movie();
@@ -12,9 +20,9 @@ namespace sdds {
       Movie(const std::string& strMovie);
 
       template<typename T>
-      void fixSpelling(T& spellChecker);
+      void fixSpelling(T& spellChecker); //fixes spelling mistakes in m_title and m_desc
 
-      friend std::ostream& operator << (std::ostream& os, Movie& movie);
+      friend std::ostream& operator << (std::ostream& os, const Movie& movie); //extraction overload
    };
 
    template<typename T>
