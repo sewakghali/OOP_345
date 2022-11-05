@@ -2,6 +2,8 @@
 #include"Utilities.h"
 #include"Car.h"
 #include"Van.h"
+#include"Luxuryvan.h"
+#include"Racecar.h"
 using namespace std;
 
 namespace sdds {
@@ -24,6 +26,19 @@ namespace sdds {
             ss << tempStr;
             instance = new Van(ss);
             //cout << "Van" << endl;
+         }
+         else if (tempSub[0] == 'r' || tempSub[0] == 'R') {
+            ss << tempStr;
+            instance = new Racecar(ss);
+            //cout << "Van" << endl;
+         }
+         else if (tempSub[0] == 'l' || tempSub[0] == 'L') {
+            ss << tempStr;
+            instance = new Luxuryvan(ss);
+            //cout << "Van" << endl;
+         }
+         else {
+            throw "Records contains unknown vehicle.";
          }
       }
       return instance;

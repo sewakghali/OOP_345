@@ -26,10 +26,18 @@ void loadData(const char* filename, sdds::Autoshop& as)
 		//       - the record is not recognized: the first non-empty character
 		//           on the line is not 'c', 'C', 'r', 'R', 'v', 'V', 'l', or 'L'
 		//       - one of the fields in the record contains invalid data.
-    
+		try {
 			sdds::Vehicle* aVehicle = sdds::createInstance(file);
 			if (aVehicle)
 				as += aVehicle;
+		}
+		catch(const char* msg) {
+			std::cout << msg << std::endl;
+		}
+		catch (...) {
+			std::cout << "error caught" << std::endl;
+		}
+			
 	}
 }
 
@@ -73,59 +81,59 @@ int main(int argc, char** argv)
 	av.display(std::cout);
 	std::cout << "------------------------------------------------------------\n";
 
-	std::cout << std::endl;
-	std::list<const sdds::Vehicle*> vehicles;
-	{
-		// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
-		//         and returns true if the vehicle has a top speed >300km/h
-		auto fastVehicles = ...
-		as.select(fastVehicles, vehicles);
-		std::cout << "--------------------------------\n";
-		std::cout << "|       Fast Vehicles          |\n";
-		std::cout << "--------------------------------\n";
-		for (auto it = vehicles.begin(); it != vehicles.end(); ++it)
-		{
-			(*it)->display(std::cout);
-			std::cout << std::endl;
-		}
-		std::cout << "--------------------------------\n";
-	}
+	//std::cout << std::endl;
+	//std::list<const sdds::Vehicle*> vehicles;
+	//{
+	//	// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
+	//	//         and returns true if the vehicle has a top speed >300km/h
+	//	auto fastVehicles = ...
+	//	as.select(fastVehicles, vehicles);
+	//	std::cout << "--------------------------------\n";
+	//	std::cout << "|       Fast Vehicles          |\n";
+	//	std::cout << "--------------------------------\n";
+	//	for (auto it = vehicles.begin(); it != vehicles.end(); ++it)
+	//	{
+	//		(*it)->display(std::cout);
+	//		std::cout << std::endl;
+	//	}
+	//	std::cout << "--------------------------------\n";
+	//}
 
-	vehicles.clear();
-	std::cout << std::endl;
-	{
-		// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
-		//         and returns true if the vehicle is broken and needs repairs.
-		auto brokenVehicles = ...
-		as.select(brokenVehicles, vehicles);
-		std::cout << "--------------------------------\n";
-		std::cout << "| Cars in need of repair       |\n";
-		std::cout << "--------------------------------\n";
-		for (const auto vehicle : vehicles)
-		{
-			vehicle->display(std::cout);
-			std::cout << std::endl;
-		}
-		std::cout << "--------------------------------\n";
-	}
+	//vehicles.clear();
+	//std::cout << std::endl;
+	//{
+	//	// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
+	//	//         and returns true if the vehicle is broken and needs repairs.
+	//	auto brokenVehicles = ...
+	//	as.select(brokenVehicles, vehicles);
+	//	std::cout << "--------------------------------\n";
+	//	std::cout << "| Cars in need of repair       |\n";
+	//	std::cout << "--------------------------------\n";
+	//	for (const auto vehicle : vehicles)
+	//	{
+	//		vehicle->display(std::cout);
+	//		std::cout << std::endl;
+	//	}
+	//	std::cout << "--------------------------------\n";
+	//}
 
-	vehicles.clear();
-	std::cout << std::endl;
-	{
-		// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
-		//         and returns true if the vehicle is broken and needs repairs.
-		auto brokenVehicles = ...
-		av.select(brokenVehicles, vehicles);
-		std::cout << "------------------------------------------------------------\n";
-		std::cout << "|  Vans in need of repair                                  |\n";
-		std::cout << "------------------------------------------------------------\n";
-		for (const auto vehicle : vehicles)
-		{
-			vehicle->display(std::cout);
-			std::cout << std::endl;
-		}
-		std::cout << "------------------------------------------------------------\n";
-	}
+	//vehicles.clear();
+	//std::cout << std::endl;
+	//{
+	//	// TODO: Create a lambda expression that receives as parameter `const sdds::Vehicle*`
+	//	//         and returns true if the vehicle is broken and needs repairs.
+	//	auto brokenVehicles = ...
+	//	av.select(brokenVehicles, vehicles);
+	//	std::cout << "------------------------------------------------------------\n";
+	//	std::cout << "|  Vans in need of repair                                  |\n";
+	//	std::cout << "------------------------------------------------------------\n";
+	//	for (const auto vehicle : vehicles)
+	//	{
+	//		vehicle->display(std::cout);
+	//		std::cout << std::endl;
+	//	}
+	//	std::cout << "------------------------------------------------------------\n";
+	//}
 
 	std::cout << std::endl;
 

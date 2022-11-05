@@ -7,9 +7,15 @@ namespace sdds {
       m_vehicles.push_back(theVehicle);
    }
    void Autoshop::display(std::ostream& out) {
-      for (vector<Vehicle*>::iterator i = m_vehicles.begin(); i < m_vehicles.end(); i++)
-         //{
-        (*i)->display(out);
-      //}
+      for (vector<Vehicle*>::iterator i = m_vehicles.begin(); i < m_vehicles.end(); i++){
+         (*i)->display(out);
+         out << std::endl;
+      }
+   }
+
+   Autoshop::~Autoshop() {
+      for (vector<Vehicle*>::iterator i = m_vehicles.begin(); i < m_vehicles.end(); i++) {
+         delete *i;
+      }
    }
 }
