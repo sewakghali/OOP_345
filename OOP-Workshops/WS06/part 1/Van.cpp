@@ -1,4 +1,5 @@
 #include <string>
+#include<iomanip>
 #include"Van.h"
 
 using namespace std;
@@ -6,31 +7,29 @@ namespace sdds {
    Van::Van(std::istream& is) {
       std::string tempStr;
       std::string tempSub;
-      //for (size_t i = 0; !eof(); i++) {
 
       getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+      tempSub = tempStr.substr(0, tempStr.find(','));
+      tempStr.erase(0, tempStr.find(',') + 1);
       trim(tempSub);
 
-      getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+      tempSub = tempStr.substr(0, tempStr.find(','));
+      tempStr.erase(0, tempStr.find(',') + 1);
       v_maker = trim(tempSub);
 
-      getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+      tempSub = tempStr.substr(0, tempStr.find(','));
+      tempStr.erase(0, tempStr.find(',') + 1);
       v_type = trim(tempSub);
 
-      getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+      tempSub = tempStr.substr(0, tempStr.find(','));
+      tempStr.erase(0, tempStr.find(',') + 1);
       v_purpose = trim(tempSub);
 
-      getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+      tempSub = tempStr.substr(0, tempStr.find(','));
+      tempStr.erase(0, tempStr.find(',') + 1);
       v_condition = trim(tempSub);
 
-      getline(is, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
-      v_tSpeed = stod(trim(tempSub));
+      v_tSpeed = stod(trim(tempStr));
    }
 
    std::string Van::condition() const {
@@ -46,7 +45,8 @@ namespace sdds {
       return v_purpose;
    }
    void Van::display(std::ostream& out) const {
-      cout << "trial" << endl;
+      out << "| " << setw(8) << setfill(' ') << v_maker << " | " << setw(12) << v_type << " | " << setw(12) << setfill(' ') << v_purpose << " | " << setw(6) << setfill(' ') << v_condition << " | " << setw(6) << fixed << setprecision(2) << v_tSpeed << " |" << endl;
+      return;
    }
 
    /*std::string trim(string& str) {

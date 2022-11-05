@@ -1,3 +1,4 @@
+#include<sstream>
 #include"Utilities.h"
 #include"Car.h"
 #include"Van.h"
@@ -5,19 +6,27 @@ using namespace std;
 
 namespace sdds {
    Vehicle* createInstance(std::istream& in) {
-      std::string tempStr;
-      std::string tempSub;
+      std::string tempStr = "";
+      std::string tempSub = "";
       getline(in, tempStr);
-      tempSub = tempStr.substr(0, tempStr.find(',') + 1);
-      tempSub = trim(tempSub);
+      std::stringstream ss;
       Vehicle* instance=nullptr;
-      if (tempSub[0] == 'c' || tempSub[0] == 'C') {
-         instance = new Car(in);
+      if (tempStr != "") {
+         tempSub = tempStr.substr(0, tempStr.find(',') + 1);
+         //std::cout << "utils trial 1: " << tempStr << std::endl;
+         tempSub = trim(tempSub);
+         if (tempSub[0] == 'c' || tempSub[0] == 'C') {
+            ss << tempStr;
+            //cout << "car" << endl;
+            instance = new Car(ss);
+         }
+         else if (tempSub[0] == 'v' || tempSub[0] == 'V') {
+            ss << tempStr;
+            instance = new Van(ss);
+            //cout << "Van" << endl;
+         }
       }
-      else if (tempSub[0] == 'v' || tempSub[0] == 'V') {
-         instance = new Van(in);
-      }
-      return nullptr;
+      return instance;
    }
 
    /*std::string trim(std::string& str) {
