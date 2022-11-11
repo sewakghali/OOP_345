@@ -1,3 +1,11 @@
+/*****************************************************************
+Module: Autoshop.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 5, 2022
+******************************************************************/
+
 #pragma once
 #include<iostream>
 #include<vector>
@@ -19,12 +27,11 @@ namespace sdds {
 
    template<typename T>
    void Autoshop::select(T test, std::list<const Vehicle*>& vehicles) {
-      /*testFunc = [test](const Vehicle*) {
-         if (vehicle*) {
-            return true;
+      for (const auto vehicle : m_vehicles) {
+         if (test(vehicle)) {
+            vehicles.push_back(vehicle);
          }
-         return false;
-      }*/
-      vehicles.push_back(test);
+      }
+      return;
    }
 }
