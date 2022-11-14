@@ -5,12 +5,12 @@
 
 namespace sdds {
    typedef struct {
-      std::string c_province;
-      std::string c_district;
-      std::string c_crime;
-      size_t c_caseNum;
-      size_t c_year;
-      size_t c_resolved;
+      std::string m_province;
+      std::string m_district;
+      std::string m_crime;
+      size_t m_caseNum;
+      size_t m_year;
+      size_t m_resolved;
    }Crime;
 
    class CrimeStatistics {

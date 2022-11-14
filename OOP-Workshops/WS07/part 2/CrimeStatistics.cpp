@@ -1,3 +1,11 @@
+/*****************************************************************
+Module: CrimeStatistics.cpp
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 12, 2022
+******************************************************************/
+
 #include<algorithm>
 #include<fstream>
 #include<iomanip>
@@ -54,18 +62,19 @@ namespace sdds {
    }
 
    void CrimeStatistics::display(std::ostream& out) const {
+      //out.flush();
       size_t numCases = 0;
       size_t numResolved = 0;
-      for(Crime* var:cs_CrimeVect)
+      for(auto var:cs_CrimeVect)
       {
          numCases += var->m_caseNum; //total num of cases in cs_CrimeVect
          numResolved += var->m_resolved; //total resolved cases in cs_CrimeVect
-         out << *var << '\n';
+         out << *var << endl;
       }
 
-      out << std::setfill('-') << std::setw(88) << '-' << endl;
-      out << "|" << right << setw(79) << setfill(' ')  <<"Total Crimes: " << setw(6) << numCases << " |"<< endl;
-      out << "|" << right << setw(79) << setfill(' ') <<"Total Resolved Cases: " << setw(6) << numResolved << " |" << left;
+      out << std::setfill('-') << std::setw(88) << '-' << '\n';
+      out << "|" << right << setfill(' ') << setw(79) << "Total Crimes: " << setw(6) << numCases << " |" << '\n';
+      out << "|" << setw(79) <<"Total Resolved Cases: " << setw(6) << numResolved << " |" << endl;
 
       return;
    }
@@ -117,8 +126,7 @@ namespace sdds {
    }
 
    std::ostream& operator << (std::ostream& os, const Crime& crime) {
-      os << "| " << setfill(' ') << setw(21) << left << crime.m_province << " | " << setw(15) << crime.m_district << " | " << setw(20) << crime.m_crime << " | " << setw(6) << right << crime.m_year << " | "  <<setw(4) << crime.m_caseNum << " | " << setw(3) << crime.m_resolved << " |" << left;
-
+      os << "| " << setfill(' ') << setw(21) << left << crime.m_province << " | " << setw(15) << crime.m_district << " | " << setw(20) << crime.m_crime << " | " << setw(6) << right << crime.m_year << " | " << setw(4) << crime.m_caseNum << " | " << setw(3) << crime.m_resolved << " |";
       return os;
    }
 

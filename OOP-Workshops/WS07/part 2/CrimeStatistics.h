@@ -1,3 +1,11 @@
+/*****************************************************************
+Module: CrimeStatistics.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 12, 2022
+******************************************************************/
+
 #pragma once
 #include<iostream>
 #include<string>
