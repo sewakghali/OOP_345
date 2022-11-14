@@ -1,0 +1,33 @@
+/*****************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 5, 2022
+******************************************************************/
+
+This workshop acted as an exercise for using STL containers like vectors, lists and maps for storing data. The usage examples of above containers from this workshop are as follows:
+    1. std::vector<Vehicle*> m_vehicles; //from Autoshop.h
+    2. std::list<const sdds::Vehicle*> vehicles; //from w6p2.cpp
+    3. extern std::map<std::string, std::string> cCondMap; //from Car.h
+
+Apart from exercising the usage of containers, I also got a chance to revisit error handling.
+One thing that I used for the first time in C++ was regular expressions in C++. One use case example from Car.cpp is as follows:
+    if (regex_search(tempSub, regex("[^0-9. ]"))) {
+        throw "Invalid record!";
+    }
+    else {         
+        c_tSpeed = stod(trim(tempSub));
+    }
+This regular expression was used to check if there is any other character except numeric digits, decimal point or space in the string that was to be converted to a double value.
+
+Now moving onto the vector that was used in Autoshop module, we can see that each of its element is a pointer for objects of type Vehicle, and since each Vehicle that the corresponding pointer points to is dynamically allocated, it needs to be deallocated as well to prevent memory leaks.
+
+To deallocate memory from the elements of the vector in Autoshop class, all I did was iterate through each of the elements of the vector and deallocate the memory manually in the class destructor. Here is the implementation of the destructor:
+    Autoshop::~Autoshop() {
+      for (vector<Vehicle*>::iterator i = m_vehicles.begin(); i < m_vehicles.end(); i++) {
+         delete *i;
+      }
+   }
+
+Yes, std::list<sdds::Vehicle> and std::vector<sdds::Vehicle> can be used instead of std::list<sdds::Vehicle*> and std::vector<sdds::Vehicle*> respectively and the program would still work fine, but there is an excellent reason not to do that. Keeping in mind the large size (in bytes) of the objects that we have created in this workshop (Car, Van, LuxuryVan, Racecar), it is better to implement the latter method because doing so will increase performance. When performing operations like pop, push_back, etc., std::vector and std::list implement copy semantics, which is very demanding on resources. So if we use the former method (using sdds::Vehicle), the program would spend a lot of time and resources implementing the aforementioned basic operations .Instead, we can store the pointer that points to that specific object in memory (sdds::Vehicle*) and save us a lot of time and computation.

@@ -1,0 +1,68 @@
+/*****************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 12, 2022
+******************************************************************/
+
+Workshop 7 was a great way to level up my skills with stl algorithms, especially with ones containing iterative logic. I will explain along with my snippets of code why I opted for specific algorithms rather than using the loops.
+Here are the examples of my code for each stl algorithm I used:
+1. For each loop in display function:
+for(auto var:cs_CrimeVect)
+{
+    ...;
+    out << *var << endl;
+}
+I used for each loop for display function because it has to iterate over every element present in the cs_CrimeVect vector and print it onto the screen. Using for each loop prevents errors like off by one errors, indexing errors, and invalid read errors.
+
+
+2. Sort algorithm in sort function: 
+std::sort(cs_CrimeVect.begin(), cs_CrimeVect.end(), [](auto& lhs, auto& rhs) { return lhs->m_province
+< rhs->m_province; });
+I used sort algorithm because it saved me a lot of time instead of using nested loops for sorting. It also prevents errors like off by one error, invalid read and indexing error.
+
+3. transform algorithm in cleanList function:
+std::transform(cs_CrimeVect.begin(), cs_CrimeVect.end(), cs_CrimeVect.begin(), [](auto& crimeObj) {
+    if (crimeObj->m_crime == "[None]") {
+    crimeObj->m_crime.replace(0, 6, "");
+    }
+    return crimeObj;
+});
+Since the elements of original vector had to be modified, transform algorithm seemed to be the best choice because it transformed specific elements while storing the modified data in the original vector.
+
+4. any_of algorithm in inCollection function:
+return any_of(cs_CrimeVect.begin(), cs_CrimeVect.end(), [cName](auto& crimeObj) {
+    if (crimeObj->m_crime == cName)return true;
+    return false;
+    });
+any_of algorithm returns true if any element from the STL container returns true for the specified predicate. Since our job was to only check whether any element of cs_CrimeVect contained any crime same as the one specified as parameter.
+
+5. for_each algorithm in getListForProvince function:
+for_each(cs_CrimeVect.begin(), cs_CrimeVect.end(), [&crimesByProv, provName](auto& crimeObj) {
+    if (crimeObj->m_province == provName) {
+    crimesByProv.push_back(*crimeObj);
+    }
+});
+This is also a for each loop but has a different syntax than the one specified in first example. Instead of just iterating over every element of the container, this loop conducts the predicate supplied as a lambda function over every element of the container.
+
+Using algorithms over loops in preferably better because algorithms are far more expressive, are tested for bugs by numerous developers who developed the stl library and are a part of the standard coding practices. For example, instead of nested looping, one can use sort algorithm. Not only does it save the time, but also makes it easier to read in the future regarding what actions does it perform. Same is the case with transform and any_of, none_of, all_of, etc algorithms.
+
+To cope with input errors in the sort function, adding an else clause at the end would simply solve the problem. If the inout parameter does not match with any of the accepted values, the execution will move to the else clause, which will throw an error.
+void CrimeStatistics::sort(std::string param) {
+    if (param == "Province") {
+        ...
+    }
+    else if (param == "Crime"){
+    ...
+    }
+    else if (param == "Cases") {
+        ...
+    }
+    else if (param == "Resolved") {
+        ...
+    }
+    else{
+    throw "Wrong search parameter.";
+    }
+}
