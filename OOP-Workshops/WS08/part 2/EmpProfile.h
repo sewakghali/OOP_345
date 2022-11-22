@@ -1,3 +1,10 @@
+/*****************************************************************
+Module: EmpProfile.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 21, 2022
+******************************************************************/
 #ifndef SDDS_EMPPROFILE_H
 #define SDDS_EMPPROFILE_H
 
@@ -77,7 +84,13 @@ namespace sdds {
 		}
 
 		//TODO: add a function here to check correct salary range
-		
+		void rangeValidator() {
+			if (m_salary > 99999 || m_salary < 0) {
+				std::string error = "*** Employees salaray range is not valid";
+				throw error;
+			}
+			return;
+		}
 
 		void print(std::ostream& os)const {
 			os << std::setw(15) << name << std::setw(10) << m_salary<<std::endl;

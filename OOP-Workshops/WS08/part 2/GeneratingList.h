@@ -1,3 +1,10 @@
+/*****************************************************************
+Module: GeneratingList.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 21, 2022
+******************************************************************/
 #ifndef SDDS_GENERATINGLIST_H
 #define SDDS_GENERATINGLIST_H
 
@@ -34,15 +41,43 @@ namespace sdds {
 
 		//TODO: Implement the Luhn Algorithm to check the 
 		//      valadity of SIN No's
-		
+		bool checkSin(const std::string sin) {
+			int nDigits = sin.length();
+
+			int nSum = 0, isSecond = false;
+			for (int i = nDigits - 1; i >= 0; i--) {
+
+				int d = sin[i] - '0';
+
+				if (isSecond == true)
+					d = d * 2;
+
+				// We add two digits to handle
+				// cases that make two digits after
+				// doubling
+				nSum += d / 10;
+				nSum += d % 10;
+
+				isSecond = !isSecond;
+			}
+			return (nSum % 10 == 0);
+		}
+
 
 		//TODO: Overload the += operator with a smart pointer
 		// as a second operand.
-
+		void operator+=(std::remove_reference<std::unique_ptr<T>&> objPtr) {
+			list.push_back(std::move(objPtr));
+			return;
+		}
 		
 
 		//TODO: Overload the += operator with a raw pointer
 		// as a second operand.
+		void operator+=(T& obj) {
+			list.push_back(obj);
+			return;
+		}
 
 		
 		void print(std::ostream& os) const {

@@ -1,3 +1,10 @@
+/*****************************************************************
+Module: WritingRecord.h
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 21, 2022
+******************************************************************/
 #ifndef SDDS_WRITINGRECORD_H
 #define SDDS_WRITINGRECORD_H
 
