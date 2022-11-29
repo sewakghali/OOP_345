@@ -1,0 +1,70 @@
+/*****************************************************************
+Reflection
+Name: Sewak Singh Gill
+Email: sgill116@myseneca.ca
+Student Id: 159282219
+Date: November 28, 2022
+******************************************************************/
+
+This is my reflection on the work of workshop 9 of OOP345. This workshop consisted of problems based on file I/O operations, binary read and write and multithreading, wrapper classes and future class.
+Lets begin with the part 1. In part 1, I implemented functionality of file I/O operations and created functionality to read from and write to files. Here is a code snippet of read operations from the function recall:
+    std::ifstream binfile(filename, std::ios::in | std::ios::binary);
+       if (binfile.good()) {
+          
+          binfile.read((char*)&rows, sizeof(rows));
+          binfile.read((char*)&colSize, sizeof(rows));
+       else {
+          throw std::string("File cannot be opened.");
+       }
+    }
+Here is the write implementation from the function enscribe:
+    std::ofstream binfile(filename, std::ios::out | std::ios::binary);
+    if (binfile.good()) {
+        binfile.write((const char*)&rows, sizeof(rows));
+        binfile.write((const char*)&colSize, sizeof(colSize));
+
+        for (size_t i = 0; i<rows; i++) {
+            binfile.write(map[i].c_str(), colSize);
+        }
+        binfile.close();
+    }
+    else {
+        throw std::string("File cannot be opened.");
+    }
+As we can notice, during read/write operations of a binary file, one has to specify the size of the data-type. This is because in a binary file, all the data is stored in the form of ones and zeroes and there is no formatting. So to make sense of the binary data, one has to specify how much space does a data-type take.
+
+Now moving onto part 2, this part dealt with multithreading, wrapper classes and future class.
+Here is the code from the findTreasure function:
+    size_t TreasureMap::findTreasure(char mark){
+       size_t result = 0;
+       using namespace std::placeholders;  // for _1, _2, _3
+        std::string temp;
+        
+        auto dig = std::bind(digForTreasure,_1, mark);
+        std::packaged_task<size_t(const std::string&)> t1(dig);
+        ...
+        std::future<size_t> r1 = t1.get_future();
+        ...
+
+        for (size_t i = 0; i < rows; ++i){
+            temp += map[i]; //concatenating string into one
+        }
+        size_t tsize = temp.size();
+        std::thread td1(std::move(t1),temp.substr(0, tsize / 4));
+        ...
+
+        td1.join();
+        ...
+        
+        result = r1.get() + r2.get() + r3.get() + r4.get();
+        return result;
+    }
+
+The bind functionality wraps the specified function with placeholders and default values
+auto dig = std::bind(digForTreasure,_1, mark);
+In this case, the parameter mark is bound to the newly derived dig function. 
+packaged_task wrapper along with the futute class retrieves the return value through shared memory when passed into a thread. This is very helpful in getting return values by value rather than refernce. 
+std::packaged_task<size_t(const std::string&)> t1(dig);
+std::future<size_t> r1 = t1.get_future();
+Finally, the threads are basically branches of the main program which merge back in (to be done manually) once the assigned task has been done. It is a good way to improve performance, and avoid program crashed due to execution of bugged code in main thread.
+So in the end, I would say that I learnt a lot through this workshop about wrapper classes and multithreading and it also cleared my concepts that were not properly understood the first time.
