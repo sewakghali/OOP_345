@@ -1,5 +1,5 @@
 //-------------------------------------------
-// OOP345 Project- Milestone 1
+// OOP345 Project- Milestone 3
 // Module: Utilities.h
 // Name: Sewak Singh Gill
 // Student Id: 159282219
@@ -10,7 +10,7 @@
 #include<iostream>
 namespace sdds {
    class Utilities {
-      size_t m_widthField{1};
+      size_t m_widthField {1};
       static char m_delimiter;
 
    public:
